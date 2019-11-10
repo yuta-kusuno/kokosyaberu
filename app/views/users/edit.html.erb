@@ -1,0 +1,38 @@
+<div class=''>
+  <h1 class='border-bottom'>プロフィール編集</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="gravatar_edit">
+        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+      </div>
+        <%= form_with(model: @user, local: true) do |f| %>
+          
+          <div class="profile">
+            <%= f.label :ニックネーム %>
+            <%= f.text_field :name, class: 'form-control' %>
+
+            <%= f.label :性別, class: 'control-label' %>
+            <%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {},   class: 'form-control' %>
+
+            <%= f.label :年齢, class: 'control-label' %>
+            <%= f.select :age, [["",""], ["10代","10"], ["20代","20"], ["30代","30"], ["40代","40"], ["50代","50"], ["60代","60"], ["70代以上","70"] ], {},   class: 'form-control' %></div>
+        
+            <%= f.label :住所（郵便番号除く）%>
+            <%= f.text_field :adress, class: 'form-control' %>
+            
+            <%= f.label :マンション%>
+            <%= f.text_field :apartment, class: 'form-control' %>
+        
+            <%= f.label :メールアドレス %>
+            <%= f.email_field :email, class: 'form-control' %>
+            
+            <%= f.label :自己紹介 %>
+            <%= f.text_area :introduction, class: 'form-control' %>
+            
+            <%= f.submit "更新する", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
