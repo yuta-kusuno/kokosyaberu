@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top img-thumnbnail" src="<%= gravatar_url(post.user, { size: 50 }) %>" alt="">
+          <div class="card-body">
+            <h4 class="card-title"><%= post.user.name %>さんから
+            </br>
+            <%= link_to post.content, post_path(post.user_id) %>
+            </h4>
+            <p class="card-text">
+              いつ：<%= post.datetime %>
+              </br>
+              どこ：<%= post.place %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= paginate posts %>

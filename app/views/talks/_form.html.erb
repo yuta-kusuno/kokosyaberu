@@ -1,0 +1,7 @@
+<%= form_with(model: talk, local: true) do |f| %>
+  <%= f.text_field :content %>
+  <br>
+  <%= hidden_field_tag :user_id, user.id %>
+  <%= f.submit '送信' %>
+  <p><%= link_to "ホームへ戻る", user_path(current_user), class: 'btn btn-primary btn-sm' %></p>
+<% end %>

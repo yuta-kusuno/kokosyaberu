@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_084741) do
+ActiveRecord::Schema.define(version: 2019_11_23_081820) do
+
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.datetime "datetime"
+    t.string "place"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
+  create_table "talks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "receive_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receive_user_id"], name: "index_talks_on_receive_user_id"
+    t.index ["user_id"], name: "index_talks_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -23,7 +50,11 @@ ActiveRecord::Schema.define(version: 2019_11_09_084741) do
     t.string "photo"
     t.string "adress"
     t.string "sex"
-    t.integer "age"
+    t.integer "age", limit: 1
   end
 
+  add_foreign_key "posts", "users"
+  add_foreign_key "rooms", "users"
+  add_foreign_key "talks", "users"
+  add_foreign_key "talks", "users", column: "receive_user_id"
 end

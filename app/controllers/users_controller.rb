@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(id: :desc).page(params[:page])
+    counts(@user)
   end
 
   def new
@@ -30,15 +32,23 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user= User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = '更新されました'
+      redirect_to @user
+    else
+      flash.now[:danger] = '更新されませんでした'
+      render :edit
+    end
   end
 
   def destroy
   end
-  
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :adress, :apartment, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :sex, :age, :adress, :apartment, :introduction, :photo, :email, :password, :password_confirmation)
   end
   
 end

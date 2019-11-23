@@ -1,0 +1,24 @@
+<h2>トーク</h2>
+<% user = User.find_by(id: @talk.receive_user_id) %>
+<% @talks.each do |talk| %>
+  <div>
+    <div class="media-left">
+      <img class="media-object img-circle" src="<%= gravatar_url(talk.user, { size: 50 }) %>" alt="">
+    </div>
+    <div class="media-body">
+      <div>
+        <%= link_to talk.user.name, user_path(talk.user) %> <span class="text-muted">posted at <%= talk.created_at %></span>
+      </div>
+      <div>
+        <%= talk.content %>
+        <br>
+        <% if current_user == talk.user %>
+          <%= link_to "削除", user_path(talk), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs' %>
+        <% end %>
+      </div>
+    </div>
+      <hr>
+  </div>
+<% end %>
+
+<%= render 'talks/form', talk: @talk, user: @user %>

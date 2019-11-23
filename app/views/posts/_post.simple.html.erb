@@ -1,0 +1,11 @@
+<% posts.each do |post| %>
+  <div class="card">
+    <div class="card-body">
+      内容：<%= link_to post.content, post_path(post.user) %>
+      </br>
+      いつ：<%= post.datetime %>
+      </br>
+      どこ：<%= post.place %>
+    </div>
+  </div>
+<% end %>

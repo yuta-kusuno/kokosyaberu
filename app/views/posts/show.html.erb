@@ -1,0 +1,31 @@
+<div class="card mb-3" style="max-width: 500px;">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <img class="card-img" src="<%= gravatar_url(@post.user, { size: 200 }) %>" alt="#">
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <%= link_to @post.user.name, user_path(@post) %>
+        </br>
+        投稿日：<%= @post.created_at %>
+        </br>
+        <% if current_user != @post.user %>
+          <%= link_to "トークする", talk_path(user_id: @post.user_id), class: 'btn btn-secondary btn-sm btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <tr><td>内容</td><td><%= @post.content %></td></tr>
+  <tr><td>いつ</td><td><%= @post.datetime %></td></tr>
+  <tr><td>どこ</td><td><%= @post.place %></td></tr>
+</table>
+
+<div>
+  <% if current_user == @post.user %>
+    <%= link_to '編集する', edit_post_path(current_user), class: 'btn btn-primary btn-sm' %>
+    </br>
+    <%= link_to "削除", @post, method: :delete, data: { confirm: "削除しますか?" }, class: 'btn btn-danger btn-sm' %>
+  <% end %>
+</div>

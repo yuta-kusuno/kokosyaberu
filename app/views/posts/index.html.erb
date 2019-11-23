@@ -1,5 +1,9 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <div>
+    <!-- ユーザ検索は隠す-->
+    
+    <%= render 'posts/posts', posts: @posts %>
+  </div>
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">

@@ -1,22 +1,21 @@
-<div class="row">
-  <aside class="col-sm-5">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
-      </div>
+<div class="card mb-3" style="max-width: 500px;">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <%= image_tag(@user.photo.url, size: "30×30") unless @user.photo.file.nil? %>
+    </div>
+    <div class="col-md-6">
       <div class="card-body">
-        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
-      </div>
-      <div class="profile">
-        <%= @user.sex %>
-        <%= @user.age %>
+        <div class="border-bottom"><%= link_to 'プロフィールを編集', edit_user_path(current_user) %></div>
+        <%= @user.name %>/<%= @user.sex %>/<%= @user.age %>代
+        </br>
         <%= @user.introduction %>
       </div>
     </div>
-  </aside>
-  <div class="col-sm-7">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">自分の投稿一覧</a></li>
-    </ul>
   </div>
 </div>
+<div class="card">
+  <h5 class="card-title text-center">
+    自分の投稿<span class="badge badge-secondary"><%= @count_posts %></span>
+  </h5>
+</div>
+<%= render "posts/post.simple", posts: @posts %>
