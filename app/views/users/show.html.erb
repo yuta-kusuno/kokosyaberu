@@ -1,12 +1,23 @@
+<%= link_to "投稿一覧", posts_path, class: "btn btn-outline-info" %>
 <div class="card mb-3" style="max-width: 500px;">
   <div class="row no-gutters">
     <div class="col-md-6">
-      <%= image_tag(@user.photo.url, size: "30×30") unless @user.photo.file.nil? %>
+      <% if @user.photo.present? %>
+        <%= image_tag(@user.photo.url, size: "30×30") %>
+      <% else %>
+        <%= image_tag "icon.png" %>
+      <% end %>
     </div>
     <div class="col-md-6">
       <div class="card-body">
         <div class="border-bottom"><%= link_to 'プロフィールを編集', edit_user_path(current_user) %></div>
-        <%= @user.name %>/<%= @user.sex %>/<%= @user.age %>代
+        <%= @user.name %>
+        <% if @user.sex.present? %>
+          <%= @user.sex %>
+        <% end %>
+        <% if @user.age.present? %>
+          <%= @user.age %>代
+        <% end %>
         </br>
         <%= @user.introduction %>
       </div>

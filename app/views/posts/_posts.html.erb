@@ -3,11 +3,15 @@
     <% posts.each do |post| %>
       <div class="col-md-4">
         <div class="card">
-          <img class="card-img-top img-thumnbnail" src="<%= gravatar_url(post.user, { size: 50 }) %>" alt="">
+          <% if post.user.photo.present? %>
+            <%= image_tag(post.user.photo.url, size: "30×30") %>
+          <% else %>
+            <%= image_tag "icon.png" %>
+          <% end %>
           <div class="card-body">
-            <h4 class="card-title"><%= post.user.name %>さんから
+            <h4 class="card-title"><%= link_to post.user.name, user_path(post.user) %>さんから
             </br>
-            <%= link_to post.content, post_path(post.user_id) %>
+            <%= link_to post.content, post_path(post) %>
             </h4>
             <p class="card-text">
               いつ：<%= post.datetime %>

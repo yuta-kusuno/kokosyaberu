@@ -3,5 +3,5 @@
   <br>
   <%= hidden_field_tag :user_id, user.id %>
   <%= f.submit '送信' %>
-  <p><%= link_to "ホームへ戻る", user_path(current_user), class: 'btn btn-primary btn-sm' %></p>
+  <p><%= link_to "投稿詳細に戻る", post_path(user), class: 'btn btn-primary btn-sm' %></p>
 <% end %>

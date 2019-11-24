@@ -1,4 +1,3 @@
-<%= link_to "投稿一覧", posts_path, class: "btn btn-outline-info" %>
 <div class="card mb-3" style="max-width: 500px;">
   <div class="row no-gutters">
     <div class="col-md-6">
@@ -15,7 +14,7 @@
         投稿日：<%= @post.created_at %>
         </br>
         <% if current_user != @post.user %>
-          <%= link_to @post.user.name+"さんとトークする", talk_path(user_id: @post.user_id), class: 'btn btn-secondary btn-sm btn-block' %>
+          <%= link_to "トークする", talk_path(user_id: @post.user_id), class: 'btn btn-secondary btn-sm btn-block' %>
         <% end %>
       </div>
     </div>

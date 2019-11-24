@@ -1,5 +1,6 @@
-<h2>トーク</h2>
 <% user = User.find_by(id: @talk.receive_user_id) %>
+<h2><%= @user.name %>さんとのトーク</h2>
+
 <% @talks.each do |talk| %>
   <div>
     <div class="media-left">
@@ -13,7 +14,7 @@
         <%= talk.content %>
         <br>
         <% if current_user == talk.user %>
-          <%= link_to "削除", user_path(talk), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs' %>
+          <%= link_to "削除", talk, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs' %>
         <% end %>
       </div>
     </div>

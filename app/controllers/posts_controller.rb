@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
   
   def new
-    @post = current_user.posts.new
+    @post = Post.new
   end
   
   def show
@@ -22,8 +22,8 @@ class PostsController < ApplicationController
       redirect_to root_url
     else
       @posts = current_user.posts.order(id: :desc).page(params[:page])
-      flash.now[:danger] = '投稿に失敗しました。'
-      render 'toppages/index'
+      flash.now[:danger] = '投稿できません。'
+      render :new
     end
   end
   
@@ -44,9 +44,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post=Post.find(params[:id])
     @post.destroy
     flash[:success] = '削除しました。'
-    redirect_back(fallback_location: root_path)
+    redirect_to posts_url
   end
   
   private
