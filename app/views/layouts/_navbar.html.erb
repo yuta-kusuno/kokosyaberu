@@ -1,7 +1,6 @@
 <header class="mb-4">
   <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #EEEEEE;">
     <a class="navbar-brand" href="/">
-      <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
       ここ・しゃべる
     </a>
     <div></div>
@@ -15,7 +14,7 @@
             <li class="notification nav-item nav-link">
               <%= link_to notifications_path do %>
                 <span class="fa-stack">
-                  <i class=" far fa-bell fa-lg fa-stack-2x nav-link", style:"font-size: 1.5em;"></i>
+                  <i class=" far fa-bell fa-lg fa-stack-2x nav-link", style:"font-size: 1em;"></i>
                   <% if unchecked_notifications.any? %>
                     <i class="fa fa-circle n-circle fa-stack-1x"></i>
                   <% end %>
