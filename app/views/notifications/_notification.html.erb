@@ -1,0 +1,29 @@
+<% notifications.each do |notification| %>
+<% visiter=notification.visiter %>
+<% visited=notification.visited %>
+
+<div class="card">
+  <div class="card-body">
+    <% if visiter.photo.present? %>
+      <%= image_tag visiter.photo.url, size: "30×30" %>
+    <% else %>
+      <%= image_tag "icon.png", size: "30x30" %>
+    <% end %>
+    <%= link_to visiter.name+"さん", user_path(visiter), style:"font-weight: bold;" %>
+    <%= "が" %>
+    <% case notification.action %>
+      <% when "talk" then %>
+        <%= link_to 'あなたにDMしました', talk_path(visiter), style:"font-weight: bold;" %>
+      <% when "comment" then %>
+        <% if notification.post.user_id == visited.id %>
+          <%= link_to 'あなたの投稿', notification.post, style:"font-weight: bold;" %>
+        <% else %>
+          <%= link_to notification.post.user.name+"さんの投稿", post_path(notification.post), style:"font-weight: bold;" %>
+        <% end %>
+      <%= "にコメントしました" %>
+      <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.body %></p>
+    <% end %>
+    <p class="text-right"><%= time_ago_in_words(notification.created_at)+"前" %></p>
+  </div>
+</div>
+<% end %>

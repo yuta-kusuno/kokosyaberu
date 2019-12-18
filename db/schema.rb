@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_101830) do
+ActiveRecord::Schema.define(version: 2019_12_09_113603) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "visiter_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "talk_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "post_id"
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["talk_id"], name: "index_notifications_on_talk_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visiter_id"], name: "index_notifications_on_visiter_id"
+  end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content"
@@ -28,9 +55,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_101830) do
     t.bigint "receive_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "room_id"
     t.index ["receive_user_id"], name: "index_talks_on_receive_user_id"
-    t.index ["room_id"], name: "index_talks_on_room_id"
     t.index ["user_id"], name: "index_talks_on_user_id"
   end
 
@@ -48,6 +73,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_101830) do
     t.integer "age", limit: 1
   end
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "talks", "users"
   add_foreign_key "talks", "users", column: "receive_user_id"

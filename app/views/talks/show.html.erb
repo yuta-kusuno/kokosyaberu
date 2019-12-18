@@ -1,10 +1,14 @@
 <% user = User.find_by(id: @talk.receive_user_id) %>
-<h2><%= @user.name %>さんとのトーク</h2>
+<h2 class="text-center"><%= @user.name %>さんとのトーク</h2>
 
 <% @talks.each do |talk| %>
   <div>
     <div class="media-left">
-      <img class="media-object img-circle" src="<%= gravatar_url(talk.user, { size: 50 }) %>" alt="">
+      <% if talk.user.photo.present? %>
+        <%= image_tag talk.user.photo.url, size:'30×30' %>
+      <% else %>
+        <%= image_tag "icon.png", size: "30x30" %>
+      <% end %>
     </div>
     <div class="media-body">
       <div>
@@ -14,7 +18,7 @@
         <%= talk.content %>
         <br>
         <% if current_user == talk.user %>
-          <%= link_to "削除", talk, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs' %>
+          <%= link_to "削除", talk, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-outline-danger btn-sm' %>
         <% end %>
       </div>
     </div>

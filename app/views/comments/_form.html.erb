@@ -1,0 +1,6 @@
+<%= form_with(model: [post, comment], local: true) do |f| %>
+  <%= f.text_field :body, placeholder: "コメントする..." %>
+  <br>
+  <%= hidden_field_tag :post_id, post.id %>
+  <%= f.submit '送信', class: "btn btn-primary" %>
+<% end %>

@@ -1,37 +1,44 @@
-<%= link_to "投稿一覧", posts_path, class: "btn btn-outline-info" %>
 <div class="card mb-3" style="max-width: 500px;">
   <div class="row no-gutters">
     <div class="col-md-6">
       <% if @post.user.photo.present? %>
-        <%= image_tag(@post.user.photo.url, size: "30×30") %>
+        <%= image_tag @post.user.photo.url, size: "100×100" %>
       <% else %>
-        <%= image_tag "icon.png" %>
+        <%= image_tag "icon.png", size: "100x100" %>
       <% end %>
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <%= link_to @post.user.name, user_path(@post) %>
+        <%= link_to @post.user.name, user_path(@post.user) %>
         </br>
         投稿日：<%= @post.created_at %>
-        </br>
-        <% if current_user != @post.user %>
-          <%= link_to @post.user.name+"さんとトークする", talk_path(user_id: @post.user_id), class: 'btn btn-secondary btn-sm btn-block' %>
-        <% end %>
       </div>
     </div>
   </div>
 </div>
-        
-<table class="table">
-  <tr><td>内容</td><td><%= @post.content %></td></tr>
-  <tr><td>いつ</td><td><%= @post.datetime %></td></tr>
-  <tr><td>どこ</td><td><%= @post.place %></td></tr>
-</table>
 
-<div>
-  <% if current_user == @post.user %>
-    <%= link_to '編集する', edit_post_path(current_user), class: 'btn btn-primary btn-sm' %>
+<div class="card">
+  <div class="card-body">
+    <%= @post.content %>
     </br>
-    <%= link_to "削除", @post, method: :delete, data: { confirm: "削除しますか?" }, class: 'btn btn-danger btn-sm' %>
-  <% end %>
+    <% if @post.datetime.present? %>
+      日時：<%= @post.datetime %>
+    <% end %>
+    </br>
+    <% if @post.place.present? %>
+      場所：<%= @post.place %>
+    <% end %>
+  </div>
+  <div class="form-inline">
+    <% if current_user == @post.user %>
+      <%= link_to '編集する', edit_post_path(current_user), class: 'btn btn-outline-primary btn-sm' %>
+      <%= link_to "削除", @post, method: :delete, data: { confirm: "削除しますか?" }, class: 'btn btn-outline-danger btn-sm' %>
+    <% end %>
+  </div>
+</div>  
+<div>
+  <h3 class="text-center">コメント</h3>
+  <%= render 'comments/index', comments: @comments, post: @post %>
+  <%= render 'comments/form', post: @post, comment: @comment %>
+  
 </div>

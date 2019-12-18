@@ -1,11 +1,17 @@
 class TalksController < ApplicationController
   before_action :require_user_logged_in
   
+  def index
+    @user=current_user
+    @users=User.where("apartment = ? and id != ?", @user.apartment, @user.id)
+    @talks=Talk.where("user_id = ? or receive_user_id = ?", @user.id, @user.id)
+  end
+  
   def show
-    @user = User.find_by(id: params[:user_id])
-    send_ids = current_user.talks.where(receive_user_id: @user.id)
-    receive_ids = @user.talks.where(receive_user_id: current_user.id)
-    @talks = Talk.where(id: send_ids + receive_ids).order(created_at: :desc)
+    @user = User.find(params[:id])
+    send_id = current_user.talks.where(receive_user_id: @user.id)
+    receive_id = @user.talks.where(receive_user_id: current_user.id)
+    @talks = Talk.where(id: send_id + receive_id).order(created_at: :desc)
     @talk = Talk.new
   end
 
@@ -15,6 +21,9 @@ class TalksController < ApplicationController
     @talk.receive_user_id = @user.id
     if @talk.save
       flash[:success] = '送信しました。'
+      #ここから通知レコード
+      @talk.create_notification_talk!(current_user, @talk.id)
+      #ここまで
       redirect_back(fallback_location: root_path)
     else
       flash[:danger] = '送信できませんでした。'

@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @user=current_user
-    @posts = Post.joins(:user).where("apartment=?", @user.apartment).order(id: :desc).page(params[:page])
+    @posts = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
   end
   
   def new
@@ -13,6 +12,8 @@ class PostsController < ApplicationController
   
   def show
     @post=Post.find_by(id: params[:id])
+    @comments=Comment.where(post_id: @post.id)
+    @comment=Comment.new
   end
   
   def create
@@ -28,15 +29,15 @@ class PostsController < ApplicationController
   end
   
   def edit
-    @post = Post.find(params[:id])
-    @user= User.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    @user= User.find_by(id: params[:id])
   end
 
   def update
     @post= Post.find(params[:id])
     if @post.update(post_params)
       flash[:success] = '更新されました'
-      redirect_to @post
+      redirect_to current_user
     else
       flash.now[:danger] = '更新されませんでした'
       render :edit

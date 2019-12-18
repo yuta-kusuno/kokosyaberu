@@ -2,11 +2,12 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show, :edit, :update]
   
   def index
-    @users = User.order(id: :desc).page(params[:page]).per(25)
+    @users = User.where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page]).per(25)
   end
 
   def show
     @user = User.find(params[:id])
+    @post_show=Post.find_by(id: params[:id])
     @posts = @user.posts.order(id: :desc).page(params[:page])
     counts(@user)
   end

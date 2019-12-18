@@ -63,6 +63,7 @@ gem "font-awesome-rails"
 gem 'device'
 
 gem 'carrierwave'
+gem 'rmagick'
 
 group :production do
   gem 'pg', '>=0.18', '<2.0'

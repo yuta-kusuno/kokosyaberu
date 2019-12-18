@@ -1,0 +1,23 @@
+<% comments.each do |comment| %>
+  <div>
+    <div class="media-left">
+      <% if @post.user.photo.present? %>
+        <%= image_tag @post.user.photo.url, size: "30×30", class: "media-object img-circle" %>
+      <% else %>
+        <%= image_tag "icon.png", size: "30x30", class: "media-object img-circle" %>
+      <% end %>
+    </div>
+    <div class="media-body">
+      <div>
+        <%= link_to comment.user.name, user_path(comment.user) %><span class="text-muted">投稿日 <%= comment.created_at %></span>
+      </div>
+      <div>
+        <%= comment.body %>
+        <br>
+        <% if current_user == comment.user %>
+          <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-outline-danger btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
