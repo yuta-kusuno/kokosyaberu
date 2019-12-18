@@ -4,7 +4,7 @@ class Talk < ApplicationRecord
   
   has_many :notifications, dependent: :destroy
   
-  validates :content, presence: true, length: { maximum:300 }
+  validates :content, presence: true, length: { maximum:140 }
   
     def save_notification_talk!(current_user, talk_id, visited_id)
       #トークは複数回することが考えられるため、複数回通知する

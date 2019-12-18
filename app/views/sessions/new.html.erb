@@ -1,12 +1,14 @@
 <div class="text-center">
-  <h1>ログイン</h1>
+  <h2>「ここ・しゃべる」とは</h2>
+  <p>
+    シェアハウスや寮のように住民間で交流できるSNS
+  </br>
+    何か困ったことや、一緒にしたいことまで何でも聞いちゃおう
+  </p>
 </div>
-
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-
     <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-
       <div class="form-group">
         <%= f.label :email, 'メールアドレス' %>
         <%= f.email_field :email, class: 'form-control' %>
