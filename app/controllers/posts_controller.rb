@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @posts = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
+    @posts_apartment = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
+    @posts = Post.order(id: :desc).page(params[:page])
   end
   
   def new

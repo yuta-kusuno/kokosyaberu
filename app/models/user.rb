@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   before_save { self.email.downcase! }
-  validates :name, :apartment, presence: true, length: { maximum: 50 }
-  validates :adress, length: { maximum: 100}
-  validates :sex, :age, length: { maximum: 10 }
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :apartment, :adress, length: { maximum: 100}
+  validates :sex, :age, length: { maximum: 5 }
   validates :introduction, length: { maximum: 100}
   validates :email, presence: true, length: { maximum: 50 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },

@@ -1,8 +1,11 @@
 <% if logged_in? %>
   <div>
-    <!-- ユーザ検索は隠す-->
-    
-    <%= render 'posts/posts', posts: @posts %>
+    <% if current_user.apartment.present? %>
+      <%= render 'posts/posts.apartment', posts_apartment: @posts_apartment %>
+    <% else %>
+      <%= link_to "さっそく、アパート・マンション名を登録して住人と交流しよう！", edit_user_path(current_user) %>
+      <%= render 'posts/posts', posts: @posts %>
+    <% end %>
   </div>
 <% else %>
   <div class="center jumbotron">

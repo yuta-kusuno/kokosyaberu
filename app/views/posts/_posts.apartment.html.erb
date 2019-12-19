@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <% posts_apartment.each do |post| %>
+      <div class="col-md-4">
+        <div class="card">
+          <% if post.user.photo.present? %>
+            <%= image_tag post.user.photo.url, size: "30×30" %>
+          <% else %>
+            <%= image_tag "icon.png", size: "30x30" %>
+          <% end %>
+          <%= post.user.name+"さん" %>
+          <%= link_to post_path(post) do %>
+            <div class="card-body">
+              <h4 class="card-title">
+              <%= post.content %>
+              </h4>
+              <p class="card-text">
+                <% if post.datetime.present? %>
+                  日時：<%= post.datetime %>
+                <% end %>
+                </br>
+                <% if post.place.present? %>
+                  場所：<%= post.place %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>  
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= paginate posts_apartment %>
