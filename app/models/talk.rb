@@ -29,6 +29,10 @@ class Talk < ApplicationRecord
     temp_ids.each do |temp_id|
       save_notification_talk!(current_user, talk_id, temp_id['user_id'])
     end
+    if temp_ids.blank?
+      save_notification_talk!(current_user, talk_id, user_id)
+    end
+    
   end
 
 end
