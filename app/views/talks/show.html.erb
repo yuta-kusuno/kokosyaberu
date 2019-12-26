@@ -5,9 +5,9 @@
   <div>
     <div class="media-left">
       <% if talk.user.photo.present? %>
-        <%= image_tag talk.user.photo.thumb30.url %>
+        <%= image_tag talk.user.photo.thumb50.url %>
       <% else %>
-        <%= image_tag "icon.png", size: "30x30" %>
+        <%= image_tag "icon.png", size: "50x50" %>
       <% end %>
       <%= link_to talk.user.name, user_path(talk.user) %> <span class="text-muted">posted at <%= talk.created_at %></span>
       <% if current_user == talk.user %>

@@ -6,9 +6,9 @@
   <div class="media-left">
     <hr>
     <% if visiter.photo.present? %>
-      <%= image_tag visiter.photo.thumb30.url %>
+      <%= image_tag visiter.photo.thumb50.url %>
     <% else %>
-      <%= image_tag "icon.png", size: "30x30" %>
+      <%= image_tag "icon.png", size: "50x50" %>
     <% end %>
     <%= link_to visiter.name, user_path(visiter), style:"font-weight: bold;" %>
     <%= "が" %>

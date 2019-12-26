@@ -3,9 +3,9 @@
     <% posts_apartment.each do |post| %>
       <hr>
       <% if post.user.photo.present? %>
-        <%= image_tag post.user.photo.url, size: "30×30" %>
+        <%= image_tag post.user.photo.thumb50.url %>
       <% else %>
-        <%= image_tag "icon.png", size: "30x30" %>
+        <%= image_tag "icon.png", size: "50x50" %>
       <% end %>
       <% if current_user == post.user %>
         <div class="dropdown float-right">

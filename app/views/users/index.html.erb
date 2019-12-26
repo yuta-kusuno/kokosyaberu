@@ -1,6 +1,12 @@
 <% if current_user.apartment.present? %>
   <%= render 'users.apartment', users_apartment: @users_apartment %>
 <% else %>
-  <%= link_to "さっそく、アパート・マンション名を登録して住人と交流しよう！", edit_user_path(current_user), class: "btn btn-outline-danger" %>
+  <h6>
+    ※現在、全国のユーザが表示されています
+    </br>
+    アパート・マンション名を
+    <%= link_to "登録する", edit_user_path(current_user), class: "text-danger" %>
+    と住人同志で交流が出来ます。
+  <h6>
   <%= render 'users', users: @users %>
 <% end %>

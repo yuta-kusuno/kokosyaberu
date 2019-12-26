@@ -2,9 +2,9 @@
   <hr>
   <div class="media-left">
     <% if @post.user.photo.present? %>
-      <%= image_tag comment.user.photo.thumb30.url %>
+      <%= image_tag comment.user.photo.thumb50.url %>
     <% else %>
-      <%= image_tag "icon.png", size: "30x30" %>
+      <%= image_tag "icon.png", size: "50x50" %>
     <% end %>
     <%= link_to comment.user.name, user_path(comment.user) %><span class="text-muted">投稿日 <%= comment.created_at %></span>
     <% if current_user == comment.user %>
