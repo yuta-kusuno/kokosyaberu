@@ -1,28 +1,30 @@
 <% user = User.find_by(id: @talk.receive_user_id) %>
-<h2 class="text-center"><%= @user.name %>さんとのトーク</h2>
+<h2 class="text-center"><%= @user.name %></h2>
 
 <% @talks.each do |talk| %>
   <div>
     <div class="media-left">
       <% if talk.user.photo.present? %>
-        <%= image_tag talk.user.photo.url, size:'30×30' %>
+        <%= image_tag talk.user.photo.thumb30.url %>
       <% else %>
         <%= image_tag "icon.png", size: "30x30" %>
       <% end %>
+      <%= link_to talk.user.name, user_path(talk.user) %> <span class="text-muted">posted at <%= talk.created_at %></span>
+      <% if current_user == talk.user %>
+        <div class="dropdown float-right">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">
+              <%= link_to "削除", talk, method: :delete, data: { confirm: "削除しますか?" } %>
+            </button>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="media-body">
-      <div>
-        <%= link_to talk.user.name, user_path(talk.user) %> <span class="text-muted">posted at <%= talk.created_at %></span>
-      </div>
-      <div>
         <%= talk.content %>
-        <br>
-        <% if current_user == talk.user %>
-          <%= link_to "削除", talk, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-outline-danger btn-sm' %>
-        <% end %>
-      </div>
     </div>
-      <hr>
+  <hr>
   </div>
 <% end %>
 

@@ -1,0 +1,28 @@
+<div class="container">
+  <%= form_with(model: post, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :とりあえず聞いてみる（必須）, class: 'control-label' %>
+      <%= f.text_field :content, class: 'form-control', rows: 5 %>
+      
+      <div class="dropdown text-right">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          +日時、場所を追加する
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <div class="dropdown-item">
+            <%= f.label :日時（任意）, class: 'control-label' %>
+            <%= f.datetime_local_field :datetime, class: "form-control" %>
+          </div>
+          <div class="dropdown-item">
+            <%= f.label :場所（任意）, class: 'control-label' %>
+            <%= f.text_field :place, class: 'form-control', rows: 5 %>
+          </div>
+        </div>
+        <%= f.submit '投稿', class: 'btn btn-primary ' %>
+      </div>
+      
+    </div>
+    
+  <% end %>
+</div>
+

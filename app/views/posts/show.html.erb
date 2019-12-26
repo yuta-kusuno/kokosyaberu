@@ -1,24 +1,18 @@
 <div class="card mb-3" style="max-width: 500px;">
   <div class="row no-gutters">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <% if @post.user.photo.present? %>
-        <%= image_tag @post.user.photo.url, size: "100×100" %>
+        <%= image_tag @post.user.photo.thumb100.url %>
       <% else %>
         <%= image_tag "icon.png", size: "100x100" %>
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="card-body">
         <%= link_to @post.user.name, user_path(@post.user) %>
-        </br>
-        投稿日：<%= @post.created_at %>
+        | 投稿日：<%= @post.created_at %>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-body">
     <%= @post.content %>
     </br>
     <% if @post.datetime.present? %>
@@ -28,17 +22,26 @@
     <% if @post.place.present? %>
       場所：<%= @post.place %>
     <% end %>
-  </div>
-  <div class="form-inline">
     <% if current_user == @post.user %>
-      <%= link_to '編集する', edit_post_path(current_user), class: 'btn btn-outline-primary btn-sm' %>
-      <%= link_to "削除", @post, method: :delete, data: { confirm: "削除しますか?" }, class: 'btn btn-outline-danger btn-sm' %>
+      <div class="dropdown float-right">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" type="button">
+            <%= link_to '編集する', edit_post_path(current_user) %>
+          </button>
+          <button class="dropdown-item" type="button">
+            <%= link_to "削除", @post, method: :delete, data: { confirm: "削除しますか?" } %>
+          </button>
+        </div>
+      </div>
     <% end %>
   </div>
-</div>  
+</div>
+
 <div>
-  <h3 class="text-center">コメント</h3>
-  <%= render 'comments/index', comments: @comments, post: @post %>
-  <%= render 'comments/form', post: @post, comment: @comment %>
-  
+  <div class="card">
+    <h3 class="text-center">コメント</h3>
+    <%= render 'comments/index', comments: @comments, post: @post %>
+    <%= render 'comments/form', post: @post, comment: @comment %>
+  </div>
 </div>

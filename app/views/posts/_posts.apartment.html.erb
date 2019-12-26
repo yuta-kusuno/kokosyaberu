@@ -1,33 +1,38 @@
-<div class="container">
-  <div class="row">
+<div class="media-left">
+  <div class="media-body">
     <% posts_apartment.each do |post| %>
-      <div class="col-md-4">
-        <div class="card">
-          <% if post.user.photo.present? %>
-            <%= image_tag post.user.photo.url, size: "30×30" %>
-          <% else %>
-            <%= image_tag "icon.png", size: "30x30" %>
-          <% end %>
-          <%= post.user.name+"さん" %>
-          <%= link_to post_path(post) do %>
-            <div class="card-body">
-              <h4 class="card-title">
-              <%= post.content %>
-              </h4>
-              <p class="card-text">
-                <% if post.datetime.present? %>
-                  日時：<%= post.datetime %>
-                <% end %>
-                </br>
-                <% if post.place.present? %>
-                  場所：<%= post.place %>
-                <% end %>
-              </p>
-            </div>
-          <% end %>  
+      <hr>
+      <% if post.user.photo.present? %>
+        <%= image_tag post.user.photo.url, size: "30×30" %>
+      <% else %>
+        <%= image_tag "icon.png", size: "30x30" %>
+      <% end %>
+      <% if current_user == post.user %>
+        <div class="dropdown float-right">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">
+              <%= link_to '編集する', edit_post_path(post) %>
+            </button>
+            <button class="dropdown-item" type="button">
+              <%= link_to "削除", post, method: :delete, data: { confirm: "削除しますか?" } %>
+            </button>
+          </div>
         </div>
+      <% end %>
+      <%= post.user.name %>
+      <h5><%= link_to post.content, post_path(post) %></h5>
+      <div>
+        <% if post.datetime.present? %>
+          日時：<%= post.datetime %>
+        <% end %>
+        </br>
+        <% if post.place.present? %>
+          場所：<%= post.place %>
+        <% end %>
       </div>
     <% end %>
   </div>
 </div>
+
 <%= paginate posts_apartment %>

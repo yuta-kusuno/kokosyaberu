@@ -5,10 +5,11 @@ class PostsController < ApplicationController
   def index
     @posts_apartment = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
     @posts = Post.order(id: :desc).page(params[:page])
+    @post = Post.new
   end
   
   def new
-    @post = Post.new
+    
   end
   
   def show

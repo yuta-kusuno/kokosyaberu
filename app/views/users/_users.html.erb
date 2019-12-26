@@ -1,9 +1,10 @@
 <% if users.any? %>
   <ul class="list-unstyled">
     <% users.each do |user| %>
+      <hr>
       <li class="media">
         <% if user.photo.present? %>
-          <%= image_tag(user.photo.url, size:'50×50') %>
+          <%= image_tag user.photo.thumb50.url %>
         <% else %>
           <%= image_tag "icon.png", size: "50x50" %>
         <% end %>

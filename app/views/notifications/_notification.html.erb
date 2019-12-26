@@ -2,21 +2,27 @@
 <% visiter=notification.visiter %>
 <% visited=notification.visited %>
 
-<div class="card">
-  <div class="card-body">
+
+  <div class="media-left">
+    <hr>
     <% if visiter.photo.present? %>
-      <%= image_tag visiter.photo.url, size: "30×30" %>
+      <%= image_tag visiter.photo.thumb30.url %>
     <% else %>
       <%= image_tag "icon.png", size: "30x30" %>
     <% end %>
-    <%= link_to visiter.name+"さん", user_path(visiter), style:"font-weight: bold;" %>
+    <%= link_to visiter.name, user_path(visiter), style:"font-weight: bold;" %>
     <%= "が" %>
     <% case notification.action %>
       <% when "talk" then %>
         <%= "あなたに" %>
         <%= link_to 'DM', talk_path(visiter), style:"font-weight: bold;" %>
         <%= "しました" %>
-      <p class="text-muted mb-0"><%= Talk.find_by(id: notification.talk_id)&.content %></p>
+      <div class="media-body">
+        <%= Talk.find_by(id: notification.talk_id)&.content %>
+        <div class="float-right">
+          <%= time_ago_in_words(notification.created_at)+"前" %>
+        </div>
+      </div>
       <% when "comment" then %>
         <% if notification.post.user_id == visited.id %>
           <%= link_to 'あなたの投稿', notification.post, style:"font-weight: bold;" %>
@@ -24,9 +30,12 @@
           <%= link_to notification.post.user.name+"さんの投稿", post_path(notification.post), style:"font-weight: bold;" %>
         <% end %>
         <%= "にコメントしました" %>
-      <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.body %></p>
+      <div class="media-body">
+        <%= Comment.find_by(id: notification.comment_id)&.body %>
+        <div class="float-right">
+          <%= time_ago_in_words(notification.created_at)+"前" %>
+        </div>
+      </div>
     <% end %>
-    <p class="text-right"><%= time_ago_in_words(notification.created_at)+"前" %></p>
   </div>
-</div>
 <% end %>

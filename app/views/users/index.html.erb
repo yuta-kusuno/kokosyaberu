@@ -1,6 +1,6 @@
 <% if current_user.apartment.present? %>
   <%= render 'users.apartment', users_apartment: @users_apartment %>
 <% else %>
-  <%= link_to "さっそく、アパート・マンション名を登録して住人と交流しよう！", edit_user_path(current_user) %>
+  <%= link_to "さっそく、アパート・マンション名を登録して住人と交流しよう！", edit_user_path(current_user), class: "btn btn-outline-danger" %>
   <%= render 'users', users: @users %>
 <% end %>

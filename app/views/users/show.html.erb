@@ -2,7 +2,7 @@
   <div class="row no-gutters">
     <div class="col-md-6">
       <% if @user.photo.present? %>
-        <%= image_tag @user.photo.url, size: "100x100" %>
+        <%= image_tag @user.photo.thumb100.url %>
       <% else %>
         <%= image_tag "icon.png", size: "100x100" %>
       <% end %>
@@ -30,11 +30,8 @@
     </div>
   </div>
 </div>
-<div class="card">
-  <h5 class="card-title text-center">
-    <%= @user.name %>さんの投稿
-    <span class="badge badge-secondary"><%= @count_posts %></span>
-  </h5>
-</div>
-<%= render "posts/post.simple", posts: @posts, post_show: @post_show, user: @user %>
-
+<h5 class="text-center">
+  <%= @user.name %>さんの投稿
+  <span class="badge badge-secondary"><%= @count_posts %></span>
+</h5>
+<%= render "posts/posts", posts: @posts %>
