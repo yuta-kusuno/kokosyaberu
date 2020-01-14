@@ -9,6 +9,7 @@ class PostsController < ApplicationController
       @post = Post.new
     else
       @posts = Post.order(id: :desc).page(params[:page])
+      @post = Post.new
     end
     
   end
