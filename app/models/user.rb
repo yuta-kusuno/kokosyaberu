@@ -11,12 +11,12 @@ class User < ApplicationRecord
   has_secure_password
   mount_uploader :photo, PhotoUploader
   
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
-  has_many :talks #"参照、この結果をthroughで扱う"
-  has_many :own_talks, through: :talks, source: :receive_user 
-  has_many :reverses_of_talk, class_name: 'Talk', foreign_key: 'receive_user_id' #"参照"
+  has_many :talks, dependent: :destroy #"参照、この結果をthroughで扱う"
+  has_many :own_talks, through: :talks, source: :receive_user, dependent: :destroy 
+  has_many :reverses_of_talk, class_name: 'Talk', foreign_key: 'receive_user_id', dependent: :destroy #"参照"
   has_many :opponent_talks, through: :reverses_of_talk, source: :user
   
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visiter_id', dependent: :destroy

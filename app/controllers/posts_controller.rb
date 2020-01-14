@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:new, :show, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:destroy]
   
   def index
-    @posts_apartment = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
-    @posts = Post.order(id: :desc).page(params[:page])
-    @post = Post.new
+    if logged_in?
+      @posts_apartment = Post.joins(:user).where("apartment=?", current_user.apartment).order(id: :desc).page(params[:page])
+      @posts = Post.order(id: :desc).page(params[:page])
+      @post = Post.new
+    else
+      @posts = Post.order(id: :desc).page(params[:page])
+    end
+    
   end
   
   def new

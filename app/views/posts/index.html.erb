@@ -1,24 +1,25 @@
 <% if logged_in? %>
-  <div>
-    <% if current_user.apartment.present? %>
-      <%= render 'posts/posts.apartment', posts_apartment: @posts_apartment %>
-    <% else %>
-      <%= render 'posts/new', post: @post %>
-      <h6>
-        ※現在、全国のユーザが表示されています
-        </br>
-        アパート・マンション名を
-        <%= link_to "登録する", edit_user_path(current_user), class: "text-danger" %>
-        と住人同志で交流が出来ます
-      <h6>
-      <%= render 'posts/posts', posts: @posts %>
-    <% end %>
-  </div>
+  <% if current_user.apartment.present? %>
+    <%= render 'posts/posts.apartment', posts_apartment: @posts_apartment %>
+  <% else %>
+    <%= render 'posts/new', post: @post %>
+    <h6>
+      ※現在、全国のユーザが表示されています
+      </br>
+      アパート・マンション名を
+      <%= link_to "登録する", edit_user_path(current_user), class: "text-danger" %>
+      と住人同志で交流が出来ます
+    <h6>
+    <%= render 'posts/posts', posts: @posts %>
+  <% end %>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>ようこそ</h1>
-      <%= link_to '新規登録する', new_user_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
+  <%= render 'posts/new', post: @post %>
+  <h6>
+    ※現在、全国のユーザが表示されています
+    </br>
+    アパート・マンション名を
+    <%= link_to "登録する", "#", class: "text-danger" %>
+    と住人同志で交流が出来ます
+  <h6>
+  <%= render 'posts/posts', posts: @posts %>
 <% end %>

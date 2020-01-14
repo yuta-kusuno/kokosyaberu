@@ -70,3 +70,9 @@ group :production do
 end
 
 gem 'pry-byebug', group: :development
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+end
