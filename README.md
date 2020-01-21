@@ -9,7 +9,7 @@
       - Ruby on Rails5.2.2
       - Bootstrap4
  - 開発環境とツール
-   - EC2(AWS)
+   - AWS(EC2)
    - Heroku
    - Git/Github
    - Slack
