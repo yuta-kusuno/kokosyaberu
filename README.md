@@ -1,24 +1,32 @@
-# README
+# 概要
+マンションの住人と交流できるSNSです。イベント開催や物の貸し借り、お願い事などを通じて、友達を作ろう。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 作成背景
+一人暮らしの自分に向けたWebアプリ。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 機能・使用技術一覧
+ - 技術一覧
+    - 言語/フレームワーク
+      - Ruby2.5.3
+      - Ruby on Rails5.2.2
+      - Bootstrap4
+ - 開発環境とツール
+   - EC2(AWS)
+   - Heroku
+   - Git/Github
+   - Slack
+- データベース
+  - MySQL
+- 機能一覧
+  - ユーザ登録、ユーザログイン機能
+  - 投稿一覧表示機能、投稿詳細表示機能
+  - 投稿へのコメント機能
+  - 画像ファイルのアップロード機能
+  - ダイレクトメッセージ(DM)機能
+  - 通知機能（DMと投稿へのコメントを通知）
+  - ページネーション機能
+  - 単体テスト(Rspec)
+  
+  #今後の予定
+  - 単体テストを詰める
+  - LINEのトーク相手一覧のようなDMページの作成
