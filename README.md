@@ -11,6 +11,7 @@
  - 開発環境とツール
    - AWS(EC2)
    - Heroku
+   - Linuxコマンド
    - Git/Github
    - Slack
 - データベース
