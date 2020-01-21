@@ -11,7 +11,7 @@
       - Ruby on Rails5.2.2
       - Bootstrap4
  - 開発環境とツール
-   - AWS(EC2)
+   - AWS(Cloud9, EC2)
    - Heroku
    - Linuxコマンド
    - Git/Github
